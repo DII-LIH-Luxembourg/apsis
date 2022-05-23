@@ -12,3 +12,8 @@ We analyzed deep immune phenotypes emerging during acute reactions by mass cytom
 - **R**: R code for differential analysis
 - **Figures**: Marker density plots and EmbedSOM zoom-plots
 - **ManualGating**: Celltype frequencies at baseline
+
+---
+## Links
+- [GigaSOM](https://github.com/LCSB-BioCore/GigaSOM.jl) Toolkit for clustering and visualisation of really large cytometry data
+- [EmbedSOM](http://bioinfo.uochb.cas.cz/embedsom/) Fast embedding and visualization of multidimensional datasets
