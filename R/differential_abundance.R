@@ -4,7 +4,8 @@
 ##
 ## Author: Oliver Hunewald
 ##
-## This workflow has been adapted from its original version developed by Nowicka et al.
+## This workflow has been adapted from its original version developed 
+## by Nowicka et al.
 ##
 ## https://f1000research.com/articles/6-748/v2
 ##
@@ -31,7 +32,7 @@ setwd("your_data_path")
 ## ----------------------------------------------------------------------------
 ## Loading the metadata
 ## ----------------------------------------------------------------------------
-md <- read_excel("../20210701_Metadata.xlsx")
+md <- read_excel("Metadata.xlsx")
 ## Define colors for conditions
 color_conditions <- c("#6A3D9A", "#FF7F00", "#008000", "#6A0D9A", "#FF7A00", "#0080A0")
 names(color_conditions) <- levels(md$condition)
@@ -217,40 +218,4 @@ ggplot(ggdf) +
   scale_color_manual(values = color_conditions) +
   scale_fill_manual(values = color_conditions) +
   scale_shape_manual(values = c(16, 17, 8, 3, 12, 0, 1, 2))
-
-## ----------------------------------------------------------------------------
-## output the counts for the specific groups
-## and visualize in Volcano Plot
-## ----------------------------------------------------------------------------
-df_2 <- df_counts_sub[, md_subset_t0$sample_id[md_subset_t0[param] == "high"]]
-df_3 <- df_counts_sub[, md_subset_t0$sample_id[md_subset_t0[param]== "low"]]
-
-# ctrl_mean <- as.data.frame(rowMeans(df_1))
-responder_mean <- as.data.frame(rowMeans(df_2))
-non_resp_mean <- as.data.frame(rowMeans(df_3))
-
-adj_pvals <- as.data.frame(da_out1$adjp[, "adjp_HighvsLow"])
-
-r_vs_nr <- log2(responder_mean) - log2(non_resp_mean)
-
-v_data <- cbind(r_vs_nr, adj_pvals)
-colnames(v_data) <- c("foldchange", "log10pvalue")
-
-head(v_data)
-v_data$diffexpressed <- "NO"
-v_data$diffexpressed[v_data$foldchange > 0 & v_data$log10pvalue < 0.05] <- "UP"
-v_data$diffexpressed[v_data$foldchange < -0 & v_data$log10pvalue < 0.05] <- "DOWN"
-# Create a new column "delabel" to de, that will contain the name of genes differentially expressed (NA in case they are not)
-v_data$delabel <- NA
-v_data$delabel[v_data$diffexpressed != "NO"] <- rownames(v_data)[v_data$diffexpressed != "NO"]
-
-ggplot(data=v_data, aes(x=foldchange, y=-log10(log10pvalue), col=diffexpressed, label=delabel)) +
-  geom_point() + 
-  theme_minimal() +
-  geom_text_repel() +
-  scale_color_manual(values=c("blue", "black", "red")) +
-  geom_vline(xintercept=c(-0, 0), col="red") +
-  geom_hline(yintercept=-log10(0.05), col="red")
-
-
 
