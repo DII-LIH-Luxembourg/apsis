@@ -5,9 +5,7 @@ using Plots
 using StatsBase
 using XLSX
 
-"""
 
-"""
 struct CellType
 	
 	posMarker::Array{String,1}
@@ -16,10 +14,11 @@ struct CellType
 	
 end
 
+
 """
     plotClusterMarkerHist(datadir, outdir, filename)
 
-
+Plot histogram of marker expression and save it to .png file.
 """
 function plotClusterMarkerHist(datadir, outdir, filename)
 
@@ -39,6 +38,11 @@ function plotClusterMarkerHist(datadir, outdir, filename)
 
 end
 
+"""
+    getNormDF(datadir, filename)
+
+Scale each marker expression bewteen 0 and 1.
+"""
 function getNormDF(datadir, filename)
 
     exprDF = CSV.File(datadir * "/" * filename) |> DataFrame
@@ -52,6 +56,12 @@ function getNormDF(datadir, filename)
     return normDF
 end
 
+"""
+    getCellDefinitions(maindir, cMatrixFile)
+
+Create a vector of cell type specific objects with their negative and positive
+Expression markers. 
+"""
 function getCellDefinitions(maindir, cMatrixFile)
 
     cMatrix = CSV.File(maindir * "/" * cMatrixFile) |> DataFrame
@@ -76,6 +86,11 @@ function annotateRow(df, rownumber, cell, cellName)
     end
 end
 
+"""
+    doAnnotation(maindir, datadir, outdir, exprFile, freqFile, thFile, cMatrixFile)
+
+Annotates each cluster by the matching expression values defined in cell definitions.
+"""
 function doAnnotation(maindir, datadir, outdir, exprFile, freqFile, thFile, cMatrixFile)
 
     # Read the cluster expression table

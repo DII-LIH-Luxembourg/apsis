@@ -1,6 +1,8 @@
 ## ----------------------------------------------------------------------------
 ##
 ##                  ACA - Automated Cluster Annotation
+## Annotate each cluster based on their expression profile
+## defined by PBMC_Cell_Matrix.csv and marker_thresholds.csv
 ##
 ## ----------------------------------------------------------------------------
 using Pkg;
