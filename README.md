@@ -14,6 +14,10 @@ We analyzed deep immune phenotypes emerging during acute reactions by mass cytom
 - **ManualGating**: Celltype frequencies at baseline
 
 ---
+## Article
+#### https://onlinelibrary.wiley.com/share/UCUTDZPANT4UG3RJ4TSM?target=10.1111/all.15408
+
+---
 ## Links
 - [GigaSOM](https://github.com/LCSB-BioCore/GigaSOM.jl) Toolkit for clustering and visualisation of really large cytometry data
 - [EmbedSOM](http://bioinfo.uochb.cas.cz/embedsom/) Fast embedding and visualization of multidimensional datasets
